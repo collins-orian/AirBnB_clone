@@ -11,6 +11,8 @@ class BaseModel:
 
     def __init__(self, *args, **kwargs):
         """Initialize BaseModel with unique id and current datetime."""
+        if args is not None and len(args) > 0:
+            pass
         if kwargs:
             for key, value in kwargs.items():
                 if key != '__class__':
