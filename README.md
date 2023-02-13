@@ -66,41 +66,41 @@ For use this console you need to have:
 
 How To run the command interpreter:
 
-$ ./console.py
+    $ ./console.py
 
 # Examples
 
 Interactive mode:
 
-$ ./console.py
-(hbnb) help
-Documented commands (type help <topic>):
-========================================
-EOF help quit
-(hbnb)
-(hbnb)
-(hbnb) quit
-$
+    $ ./console.py
+    (hbnb) help
+    Documented commands (type help <topic>):
+    ========================================
+    EOF help quit
+    (hbnb)
+    (hbnb)
+    (hbnb) quit
+    $
 
 Non-interactive mode:
 
-$ echo "help" | ./console.py
-(hbnb)
-Documented commands (type help <topic>):
-========================================
-EOF help quit
-(hbnb)
-$
-$ cat test_help
-help
-$
-$ cat test_help | ./console.py
-(hbnb)
-Documented commands (type help <topic>):
-========================================
-EOF help quit
-(hbnb)
-$
+    $ echo "help" | ./console.py
+    (hbnb)
+    Documented commands (type help <topic>):
+    ========================================
+    EOF help quit
+    (hbnb)
+    $
+    $ cat test_help
+    help
+    $
+    $ cat test_help | ./console.py
+    (hbnb)
+    Documented commands (type help <topic>):
+    ========================================
+    EOF help quit
+    (hbnb)
+    $
 
 # AUTHORS
 
