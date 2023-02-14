@@ -12,11 +12,13 @@ class TestBaseModel(unittest.TestCase):
         '''create a BaseModel instance with kwargs'''
         examp_kwargs = {'id': self.base_modal.id, 'created_at':
                         self.base_modal.created_at, 'updated_at': self.base_modal.updated_at}
-        instance_test = BaseModel(**examp_kwargs)
+        expected_instance = BaseModel(**examp_kwargs)
 
-        self.assertEqual(self.base_modal.id, instance_test.id)
-        self.assertEqual(self.base_modal.created_at, instance_test.created_at)
-        self.assertEqual(self.base_modal.updated_at, instance_test.updated_at)
+        self.assertEqual(self.base_modal.id, expected_instance.id)
+        self.assertEqual(self.base_modal.created_at,
+                         expected_instance.created_at)
+        self.assertEqual(self.base_modal.updated_at,
+                         expected_instance.updated_at)
 
     def test_id(self):
         self.assertIsInstance(self.base_modal.id, str)
