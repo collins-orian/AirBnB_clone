@@ -8,6 +8,16 @@ class TestBaseModel(unittest.TestCase):
     def setUp(self):
         self.base_modal = BaseModel()
 
+    def test_kwargs(self):
+        '''create a BaseModel instance with kwargs'''
+        examp_kwargs = {'id': self.base_modal.id, 'created_at':
+                        self.base_modal.created_at, 'updated_at': self.base_modal.updated_at}
+        instance_test = BaseModel(**examp_kwargs)
+
+        self.assertEqual(self.base_modal.id, instance_test.id)
+        self.assertEqual(self.base_modal.created_at, instance_test.created_at)
+        self.assertEqual(self.base_modal.updated_at, instance_test.updated_at)
+
     def test_id(self):
         self.assertIsInstance(self.base_modal.id, str)
 
