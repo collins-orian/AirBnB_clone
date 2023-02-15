@@ -4,6 +4,7 @@
 
 import uuid
 from datetime import datetime
+from models.engine.file_storage import storage
 
 
 class BaseModel:
@@ -20,13 +21,11 @@ class BaseModel:
                         value = datetime.strptime(
                             value, '%Y-%m-%dT%H:%M:%S.%f')
                     setattr(self, key, value)
-            self.id = str(uuid.uuid4())
-            self.created_at = datetime.now()
-            self.updated_at = self.created_at
         else:
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
             self.updated_at = self.created_at
+            storage.new(self)
 
     def __str__(self):
         """Print BaseModel instance information."""
@@ -35,6 +34,7 @@ class BaseModel:
     def save(self):
         """Update updated_at with current datetime."""
         self.updated_at = datetime.now()
+        storage.save()
 
     def to_dict(self):
         """Return dictionary of instance attributes."""
