@@ -4,7 +4,7 @@
 
 import uuid
 from datetime import datetime
-from models.engine.file_storage import storage
+from models import storage
 
 
 class BaseModel:
@@ -43,3 +43,6 @@ class BaseModel:
         obj_dict['created_at'] = self.created_at.isoformat()
         obj_dict['updated_at'] = self.updated_at.isoformat()
         return obj_dict
+
+
+
