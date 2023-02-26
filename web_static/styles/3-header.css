@@ -1,0 +1,27 @@
+header {
+	background-color: white;
+	height: 70px;
+	width: 100%;
+	border-bottom: 1px solid #cccccc;
+	display: flex;
+	align-items: center;
+}
+
+#logo_image{
+    height: 40px;
+    width: 40px;
+}
+
+.logo {
+    display: flex;
+    text-align: center;
+    align-items: center;
+	margin-left: 20px;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: contain;
+	height: 30px;
+	width: 120px;
+    font-weight: bolder;
+    font-size: x-large;
+}
