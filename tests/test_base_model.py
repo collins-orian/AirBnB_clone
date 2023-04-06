@@ -1,12 +1,24 @@
 import unittest
 from models.base_model import BaseModel
 from datetime import datetime
+from uuid import uuid4
 
 
 class TestBaseModel(unittest.TestCase):
     def test_init(self):
         model = BaseModel()
+        self.assertIsInstance(model, BaseModel)
+        self.assertTrue(hasattr(model, "id"))
+        self.assertTrue(hasattr(model, "created_at"))
+        self.assertTrue(hasattr(model, "updated_at"))
         self.assertIsInstance(model.id, str)
+        self.assertIsInstance(model.created_at, datetime)
+        self.assertIsInstance(model.updated_at, datetime)
+
+        model_dict = model.to_dict()
+        new_model = BaseModel(**model_dict)
+        self.assertIsInstance(new_model, BaseModel)
+        self.assertEqual(model.id, new_model.id)
         self.assertIsInstance(model.created_at, datetime)
         self.assertIsInstance(model.updated_at, datetime)
 

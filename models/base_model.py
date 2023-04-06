@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-import uuid
+from uuid import uuid4
 from datetime import datetime
 
 
@@ -10,11 +10,24 @@ class BaseModel:
 
     def __init__(self, *args, **kwargs):
         """
-        Initializes a new instance of the BaseModel class.
+        Initializes the BaseModel instance with a unique id, created_at and updated_at datetime.
         """
-        self.id = str(uuid.uuid4())
-        self.created_at = datetime.now()
-        self.updated_at = datetime.now()
+        if not kwargs:
+            self.id = str(uuid4())
+            self.created_at = datetime.now()
+            self.updated_at = self.created_at
+
+        else:
+            for key, value in kwargs.items():
+                if key != '__class__':
+                    if key in ['created_at', 'updated_at']:
+                        setattr(self, key, datetime.strptime(
+                            value, '%Y-%m-%dT%H:%M:%S.%f'))
+                    else:
+                        setattr(self, key, value)
+            self.id = kwargs["id"]
+            self.created_at = kwargs["created_at"]
+            self.updated_at = kwargs["updated_at"]
 
     def __str__(self):
         """
