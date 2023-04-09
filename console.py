@@ -28,7 +28,7 @@ def parse(arg):
 class HBNBCommand(cmd.Cmd):
     """Command interpreter class"""
     prompt = "(hbnb) "
-    allowed_classes = ["BaseModel"]
+    allowed_classes = ["BaseModel", "User"]
 
     def do_quit(self, arg):
         """Quit command to exit the program"""
