@@ -10,6 +10,8 @@ from models.review import Review
 from models.city import City
 from models.state import State
 from models.place import Place
+from models.amenity import Amenity
+
 
 def parse(arg):
     curly_braces = re.search(r"\{(.*?)\}", arg)
@@ -38,6 +40,31 @@ class HBNBCommand(cmd.Cmd):
                        "Amenity",
                        "Review"]
 
+    def emptyline(self):
+        """Called when an empty line is entered in response to the prompt"""
+        pass
+
+    def default(self, arg):
+        """Default behavior for cmd module when input is invalid"""
+        argdict = {
+            "all": self.do_all,
+            "show": self.do_show,
+            "destroy": self.do_destroy,
+            "count": self.do_count,
+            "update": self.do_update
+        }
+        match = re.search(r"\.", arg)
+        if match is not None:
+            argl = [arg[:match.span()[0]], arg[match.span()[1]:]]
+            match = re.search(r"\((.*?)\)", argl[1])
+            if match is not None:
+                command = [argl[1][:match.span()[0]], match.group()[1:-1]]
+                if command[0] in argdict.keys():
+                    call = "{} {}".format(argl[0], command[1])
+                    return argdict[command[0]](call)
+        print("*** Unknown syntax: {}".format(arg))
+        return False
+
     def do_quit(self, arg):
         """Quit command to exit the program"""
         return True
@@ -46,10 +73,6 @@ class HBNBCommand(cmd.Cmd):
         """EOF command to exit the program"""
         print()
         return True
-
-    def emptyline(self):
-        """Called when an empty line is entered in response to the prompt"""
-        pass
 
     def do_create(self, arg):
         """Creates a new instance of BaseModel, saves it (to the JSON file)
@@ -114,6 +137,16 @@ class HBNBCommand(cmd.Cmd):
                 else:
                     instances.append(str(storage.all()[key]))
             print("[{}]".format(", ".join(instances)))
+
+    def do_count(self, arg):
+        """Usage: count <class> or <class>.count()
+        Retrieve the number of instances of a given class."""
+        argl = parse(arg)
+        count = 0
+        for obj in storage.all().values():
+            if argl[0] == obj.__class__.__name__:
+                count += 1
+        print(count)
 
     def do_update(self, arg):
         """Usage: update <class> <id> <attribute_name> <attribute_value> or
